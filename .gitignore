@@ -1,11 +1,6 @@
 config.js
-
 node_modules
-
 dist
-
 .parcel-cache
-
 .firebase
-
 .DS_Store

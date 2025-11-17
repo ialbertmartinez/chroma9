@@ -91,7 +91,7 @@ label
    margin-left: 12px;
 }
 
-input:placeholder
+input::placeholder
 {
    font-family: "Barlow Condensed", sans-serif;
    font-weight: 400;
@@ -153,6 +153,7 @@ input:placeholder
    color: #1e90ff;
 }
 
+/* PALETTE & SWATCH ////////////////////// */
 #palette
 {
    align-items: center;
@@ -161,6 +162,7 @@ input:placeholder
 
 .swatch
 {
+   display: none;
    box-sizing: border-box;
    line-height: 2;
    font-size: 1rem;
@@ -168,7 +170,7 @@ input:placeholder
    box-shadow: 0 2px 3px 0 #52240097;
 }
 
-
+/* COLOR-CARDS ////////////////////// */
 #color-cards
 {
    display: flex;
@@ -182,11 +184,6 @@ input:placeholder
    padding-inline: 8px;
    width: 100%;
    box-shadow: 0 2px 3px 0 #52240097;
-}
-
-.color-card-prop[id$="prop1"]
-{
-   width: 100%;
 }
 
 #color-card-prop-list
@@ -264,8 +261,12 @@ footer a:active
    }
 
    .swatch
-   {
+   {  font-family: "Barlow Condensed", sans-serif;
+      color: #323232;
       border-radius: 8px;
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: 0.2px;
    }
 
    #color-cards
@@ -276,8 +277,8 @@ footer a:active
 
    #color-card-prop-list li h3
    {
-      font-size: 20px;
-      font-weight: 400;
+      font-size: 18px;
+      font-weight: 600;
       letter-spacing: 0.3px;
       padding-block: 5px;
    }

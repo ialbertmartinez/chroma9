@@ -102,7 +102,7 @@ function displayPalette(colorData) {
       swatchDiv.textContent = colorData.colors[i].hex.value;
       swatchDiv.style.background = colorData.colors[i].hex.value;
       swatchDiv.style.color = colorData.colors[i].contrast.value;
-
+      swatchDiv.style.display = "block";
       let divEl = document.createElement("div"); // card el
       let ulEl = document.createElement('ul'); // ul element
 
@@ -134,13 +134,13 @@ function displayPalette(colorData) {
       colorProp2.id = `color${i}-prop2`;
       colorProp2.style.color = colorData.colors[i].contrast.value;
       colorProp2.classList.add("list-group-item", "color-card-prop");
-      colorProp2.innerHTML = `<p><span class="color-card-prop-name">rgb:</span> ${colorData.colors[i].rgb.value}</p>`
+      colorProp2.innerHTML = `<p>${colorData.colors[i].rgb.value}</p>`
 
       // CMYK
       colorProp3.id = `color${i}-prop3`;
       colorProp3.style.color = colorData.colors[i].contrast.value;
       colorProp3.classList.add("list-group-item", "color-card-prop");
-      colorProp3.innerHTML = `<p><span class="color-card-prop-name">cmyk:</span> ${colorData.colors[i].cmyk.value}</p>`
+      colorProp3.innerHTML = `<p>${colorData.colors[i].cmyk.value}</p>`
 
       // HEX
       colorProp4.id = `color${i}-prop4`;

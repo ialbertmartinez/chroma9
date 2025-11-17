@@ -169,37 +169,49 @@ input:placeholder
    box-sizing: border-box;
    line-height: 2;
    font-size: 1rem;
-   margin-inline: 10px;
+   margin-inline: 0;
+}
+
+
+#color-cards
+{
+   flex-direction: column;
+   margin-bottom: 50px;
 }
 
 #color-cards>.color-card
 {
-   width: 20%;
    box-sizing: border-box;
    padding-inline: 8px;
+   width: 100%;
+}
+
+.color-card-prop[id$="prop1"]
+{
+   width: 100%;
 }
 
 #color-card-prop-list
-
-/* ul */
 {
-   flex-direction: column;
+   flex-direction: row;
+   flex-wrap: wrap;
 }
 
 #color-card-prop-list li
 {
-   /* ul li */
+   min-width: 100%;
+   padding-block: 15px;
    background-color: transparent;
 }
 
 #color-card-prop-list li h3
-
-/* ul li h3 */
 {
    width: 100%;
-   font-size: 16px;
-   font-weight: 400;
-   letter-spacing: 0.3px;
+   font-size: 18px;
+   font-family: "Barlow Condensed", sans-serif;
+   font-weight: 600;
+   font-style: normal;
+   letter-spacing: 0.5px;
 }
 
 .color-card-prop p,
@@ -209,13 +221,6 @@ input:placeholder
    display: inline;
    margin: 0;
    padding: 0;
-}
-
-.color-card-prop h3
-{
-   font-family: "Barlow Condensed", sans-serif;
-   font-weight: 600;
-   font-style: normal;
 }
 
 #footer
@@ -237,57 +242,9 @@ footer a:active
    color: #ffa631;
 }
 
-@media all and (max-width: 768px)
+#palette
 {
-   .swatch
-   {
-      margin-inline: 0;
-   }
-
-   #color-cards
-   {
-      flex-direction: column;
-      margin-bottom: 50px;
-   }
-
-   #color-cards>.color-card
-   {
-      width: 100%;
-   }
-
-   .color-card-prop[id$="prop1"]
-   {
-      width: 100%;
-   }
-
-   #color-card-prop-list li h3
-   {
-      font-size: 18px;
-      font-weight: 900;
-      letter-spacing: 0.5px;
-   }
-
-   .color-card>.card-img-top
-   {
-      display: none;
-   }
-
-   #color-card-prop-list
-   {
-      flex-direction: row;
-      flex-wrap: wrap;
-   }
-
-   #color-card-prop-list li
-   {
-      min-width: 100%;
-      padding-block: 15px;
-   }
-
-   #palette
-   {
-      flex-direction: column;
-   }
+   flex-direction: column;
 }
 
 
@@ -309,6 +266,7 @@ footer a:active
       display: flex;
       flex-flow: row nowrap;
       align-items: center;
+      column-gap: 15px;
    }
 
    .swatch

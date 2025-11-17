@@ -7,27 +7,73 @@
    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css"/>
    <title>Test Project</title>
 </head>
-
 <body>
-   <main class="container">
-      <h1>Test Project</h1>
-      <p>This is a simple test project to demonstrate how easy it is to set up a new project.
-         In this exercise, we completed the following tasks:</p>
-      <ol>
-         <li>Set up the project folder and installed the initial packages</li>
-         <li>Initialized Git</li>
-         <li>Initialized Firebase</li>
-         <li>Added some HTML code</li>
-         <li>Linked the Bootstrap files</li>
-         <li>Served and tested the project locally</li>
-         <li>Packaged the project for deployment</li>
-         <li>Deployed to Firebase</li>
-      </ol>
-      <p>Later, I might decide to come back here and play around with this file some more, to test out some things.
-         It's sort of like a code sandbox that I can use to practice Bootstrap components, styles, and more.
-         If I want to change anything in this project, I just need to re-build and re-deploy my changes. It's that easy!
-      </p>
-   </main>
+   <div class="wrapper">
+      <header class="container text-center mt-sm-3 mt-lg-5">
+         <div class="row">
+            <h1 id="page-name" class="col">CHROMA CAST</h1>
+         </div>
+         <div class="row">
+            <p class="col text-body-secondary">Enter a city to get a color palette based on its current weather.</p>
+         </div>
+      </header>
+
+      <main id="main" class="container mx-auto">
+         <div id="form-container" class="row row-gap-4">
+            <!-- zip code input	 -->
+            <div class="col-md row-md-4 form-floating">
+               <input type="text" class="form-control form-control-lg" id="zip" placeholder="Enter Zip code">
+               <label for="zip" class="form-label">Zip Code</label>
+            </div> <!--  ./ zip floating div  -->
+
+            <div class="col-md row-md-4 form-floating">
+               <!-- 	 select	 -->
+               <select name="mode" id="mode" class="form-select form-select-lg" placehoder="Color Mode">
+                  <option selected>Select color mode</option>
+                  <option value="monochrome">monochrome</option>
+                  <option value="monochrome-dark">monochrome-dark</option>
+                  <option value="monochrome-light">monochrome-light</option>
+                  <option value="analogic">analogic</option>
+                  <option value="complement">complement</option>
+                  <option value="analogic-complement">analogic-complement</option>
+                  <option value="triad">triad</option>
+                  <option value="quad">quad</option>
+               </select>
+               <label for="mode" class="form-label">Color Mode</label>
+            </div><!-- ./ mode floating	div -->
+            <button id="get-colors-btn" type="button" class="btn btn-primary btn-lg">
+               Get Colors
+            </button>
+         </div> <!-- ./ end of parent div -->
+
+         <div class="col-sm">
+            <p id="info-display" class="message"></p>
+         </div>
+         <div id="palette" class="row text-center justify-content-evenly my-5">
+            <div id="swatch0" class="col-sm swatch rounded-top-3 py-2"></div>
+            <div id="swatch1" class="col-sm swatch py-2"></div>
+            <div id="swatch2" class="col-sm swatch py-2"></div>
+            <div id="swatch3" class="col-sm swatch py-2"></div>
+            <div id="swatch4" class="col-sm swatch rounded-bottom-3 py-2"></div>
+         </div>
+         <div id="color-cards" class="row justify-content-between"></div>
+      </main>
+
+      <footer id="footer" class="sticky-sm-bottom container text-center mt-5 p-3 text-white">
+         <!-- <figure>
+         <blockquote class="blockquote">
+            <p>Hello everyone, I hope you find this app as interesting and weird as that is exactly what it is meant to be. This app
+            was made with lots of love, 2 hands, and a keyboard. Intended to be used for anything your creative minds can think of.
+            Be it a palette for a new project, as a creative prompt, a spiritual guide, the colors for your next kids room, or kids
+            bday party theme, or just to pull a color because you lust for color. Whatever, I don't judge. Go wild, hit the button 2x, who cares. Just enter a zip code everytime or it won't work... AND...<br /> <em>always remember to bring color into your world.</em></p>
+         </blockquote>
+         <figcaption class="blockquote-footer">
+            —— Albert <cite title="A Note from the Developer">A little note from the developer</cite>
+         </figcaption>
+      </figure> -->
+         <p>©2025 <a href="https://ialbertmartinez.com">Albert Martinez</a></p>
+      </footer>
+   </div>
    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js" defer></script>
    
 </body>

@@ -9,7 +9,7 @@
 </head>
 <body>
    <div class="wrapper">
-      <header class="container text-center mt-sm-3 mt-lg-5">
+      <header id="header" class="container text-center mt-sm-3 mt-lg-5">
          <div class="row">
             <h1 id="page-name" class="col">CHROMA 9</h1>
          </div>
@@ -22,13 +22,13 @@
          <div id="form-container" class="row row-gap-4">
             <!-- zip code input	 -->
             <div class="col-md row-md-4 form-floating">
-               <input type="text" class="form-control form-control-lg" id="zip" placeholder="Enter Zip code">
+               <input type="text" class="form-control form-control-lg" id="zip" placeholder="Enter Zip code" required>
                <label for="zip" class="form-label">Zip Code</label>
             </div> <!--  ./ zip floating div  -->
 
             <div class="col-md row-md-4 form-floating">
                <!-- 	 select	 -->
-               <select name="mode" id="mode" class="form-select form-select-lg" placehoder="Color Mode">
+               <select name="mode" id="mode" class="form-select form-select-lg" required>
                   <option selected>Select color mode</option>
                   <option value="monochrome">monochrome</option>
                   <option value="monochrome-dark">monochrome-dark</option>

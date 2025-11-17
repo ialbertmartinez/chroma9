@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600&family=Barlow:wght@400;800&display=swap');
 
 *
 {
@@ -64,7 +64,7 @@ main
 h1
 {
    font-family: "Barlow", sans-serif;
-   font-weight: 900;
+   font-weight: 800; 
    font-style: normal;
    font-size: 56px;
 }
@@ -86,14 +86,13 @@ input,
 label
 {
    font-family: "Barlow Condensed", sans-serif;
+   font-size: 1rem;
    font-weight: 600;
    font-style: normal;
 }
 
 label
 {
-   font-family: "Barlow Condensed", sans-serif;
-   font-weight: 600;
    margin-left: 12px;
 }
 
@@ -109,8 +108,8 @@ input:placeholder
    background: #ed9900;
    border-color: #cd8500;
    color: white;
-   font-family: 'barlow', sans-serif;
-   font-weight: 500;
+   font-family: "Barlow", sans-serif;
+   font-weight: 800;
    text-shadow: 0 0 3px #503400;
 }
 

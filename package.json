@@ -1,5 +1,5 @@
 {
-  "name": "chromacast",
+  "name": "chroma9",
   "version": "1.0.0",
   "source": "index.html",
   "scripts": {
@@ -8,9 +8,9 @@
     "build": "parcel build"
   },
   "keywords": [],
-  "author": "",
+  "author": "Albert Martinez",
   "license": "ISC",
-  "description": "A color palette creator via weather conditions from a specified zip code",
+  "description": "Get a color palette based on a city's current weather.",
   "devDependencies": {
     "parcel": "^2.16.1"
   },

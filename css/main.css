@@ -1,0 +1,331 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&display=swap');
+
+*
+{
+   box-sizing: border-box;
+}
+
+html,
+body
+{
+   box-sizing: border-box;
+   height: 100%;
+}
+
+.wrapper
+{
+   box-sizing: border-box;
+   min-height: 100%;
+
+   display: flex;
+   flex-direction: column;
+}
+
+#header,
+#footer
+{
+   flex-grow: 0;
+   flex-shrink: 0;
+}
+
+main
+{
+   padding: 20px;
+
+   flex-grow: 1;
+}
+
+body
+{
+   background: radial-gradient(#f5f2ed, #d2cec7);
+   min-height: 100Vh;
+}
+
+body,
+p
+{
+   font-family: "Barlow", sans-serif;
+   font-weight: 400;
+   font-style: normal;
+}
+
+main
+{
+   max-width: 90%;
+}
+
+#form-container
+{
+   min-width: 100%;
+   display: flex;
+   flex-direction: row;
+}
+
+h1
+{
+   font-family: "Barlow", sans-serif;
+   font-weight: 900;
+   font-style: normal;
+   font-size: 56px;
+}
+
+input,
+select,
+#zip,
+#mode
+{
+   background: transparent;
+   border-bottom: 1px solid #323232;
+   box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.5);
+   max-height: 100%;
+   min-height: 80px;
+   font-size: 16px;
+}
+
+input,
+label
+{
+   font-family: "Barlow Condensed", sans-serif;
+   font-weight: 600;
+   font-style: normal;
+}
+
+label
+{
+   font-family: "Barlow Condensed", sans-serif;
+   font-weight: 600;
+   margin-left: 12px;
+}
+
+input:placeholder
+{
+   font-family: "Barlow Condensed", sans-serif;
+   font-weight: 400;
+   font-style: normal;
+}
+
+#get-colors-btn
+{
+   background: #ed9900;
+   border-color: #cd8500;
+   color: white;
+   font-family: 'barlow', sans-serif;
+   font-weight: 500;
+   text-shadow: 0 0 3px #503400;
+}
+
+#get-colors-btn:hover
+{
+   background: #7c5100;
+   border-color: #ab6f00;
+}
+
+#get-colors-btn:active
+{
+   background: #ca760a;
+   border-color: #be6f0a;
+}
+
+#info-display
+{
+   display: none;
+   background: transparent;
+   color: #323232;
+   line-height: 2;
+   border-radius: 8px;
+   text-align: center;
+   margin-top: 15px;
+}
+
+.message
+{
+   display: block;
+}
+
+.message.error
+{
+   color: #d32916;
+}
+
+.message.success
+{
+   color: #0db80d;
+}
+
+.message.info
+{
+   color: #1e90ff;
+}
+
+.palette
+{
+   align-items: center;
+   flex-direction: row;
+
+}
+
+.swatch
+{
+   box-sizing: border-box;
+   line-height: 2;
+   font-size: 1rem;
+   margin-inline: 10px;
+}
+
+#color-cards>.color-card
+{
+   width: 20%;
+   box-sizing: border-box;
+   padding-inline: 8px;
+}
+
+#color-card-prop-list
+
+/* ul */
+{
+   flex-direction: column;
+}
+
+#color-card-prop-list li
+{
+   /* ul li */
+   background-color: transparent;
+}
+
+#color-card-prop-list li h3
+
+/* ul li h3 */
+{
+   width: 100%;
+   font-size: 16px;
+   font-weight: 400;
+   letter-spacing: 0.3px;
+}
+
+.color-card-prop p,
+.color-card-prop h3
+{
+   margin-block: 0;
+   display: inline;
+   margin: 0;
+   padding: 0;
+}
+
+.color-card-prop h3
+{
+   font-family: "Barlow Condensed", sans-serif;
+   font-weight: 600;
+   font-style: normal;
+}
+
+#footer
+{
+   background: #1b1b1b;
+   min-width: 100%;
+}
+
+footer a,
+footer a:link
+{
+   text-decoration: none;
+   color: #ff950c;
+}
+
+footer a:hover,
+footer a:active
+{
+   color: #ffa631;
+}
+
+@media all and (max-width: 768px)
+{
+   .swatch
+   {
+      margin-inline: 0;
+   }
+
+   #color-cards
+   {
+      flex-direction: column;
+      margin-bottom: 50px;
+   }
+
+   #color-cards>.color-card
+   {
+      width: 100%;
+   }
+
+   .color-card-prop[id$="prop1"]
+   {
+      width: 100%;
+   }
+
+   #color-card-prop-list li h3
+   {
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+   }
+
+   .color-card>.card-img-top
+   {
+      display: none;
+   }
+
+   #color-card-prop-list
+   {
+      flex-direction: row;
+      flex-wrap: wrap;
+   }
+
+   #color-card-prop-list li
+   {
+      min-width: 100%;
+      padding-block: 15px;
+   }
+
+   #palette
+   {
+      flex-direction: column;
+   }
+}
+
+
+@media all and (min-width: 768px)
+{
+   header
+   {
+      margin-bottom: 30px;
+   }
+
+   #get-colors-btn
+   {
+      max-width: 25%;
+      margin-left: 10px;
+   }
+
+   #palette
+   {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+   }
+
+   .swatch
+   {
+      border-radius: 8px;
+   }
+
+   #color-cards
+   {
+      column-gap: 10px;
+   }
+
+   #color-card-prop-list li h3
+   {
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: 0.3px;
+      padding-block: 5px;
+   }
+}

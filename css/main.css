@@ -12,6 +12,20 @@ body
    height: 100%;
 }
 
+body,
+p
+{
+   font-family: "Barlow", sans-serif;
+   font-weight: 400;
+   font-style: normal;
+}
+
+body
+{
+   background: radial-gradient(#f5f2ed, #d2cec7);
+   min-height: 100Vh;
+}
+
 .wrapper
 {
    box-sizing: border-box;
@@ -31,26 +45,7 @@ body
 main
 {
    padding: 20px;
-
    flex-grow: 1;
-}
-
-body
-{
-   background: radial-gradient(#f5f2ed, #d2cec7);
-   min-height: 100Vh;
-}
-
-body,
-p
-{
-   font-family: "Barlow", sans-serif;
-   font-weight: 400;
-   font-style: normal;
-}
-
-main
-{
    max-width: 90%;
 }
 
@@ -64,7 +59,7 @@ main
 h1
 {
    font-family: "Barlow", sans-serif;
-   font-weight: 800; 
+   font-weight: 800;
    font-style: normal;
    font-size: 56px;
 }
@@ -74,9 +69,9 @@ select,
 #zip,
 #mode
 {
-   background: transparent;
+   background: #ffffff;
    border-bottom: 1px solid #323232;
-   box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.5);
+   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
    max-height: 100%;
    min-height: 80px;
    font-size: 16px;
@@ -111,23 +106,25 @@ input:placeholder
    font-family: "Barlow", sans-serif;
    font-weight: 800;
    text-shadow: 0 0 3px #503400;
+   transition: all 0.4s ease-in-out;
 }
 
 #get-colors-btn:hover
 {
    background: #7c5100;
    border-color: #ab6f00;
+   transition: all 0.4s ease-in-out;
 }
 
 #get-colors-btn:active
 {
    background: #ca760a;
    border-color: #be6f0a;
+   transition: all 0.4s ease-in-out;
 }
 
 #info-display
 {
-   display: none;
    background: transparent;
    color: #323232;
    line-height: 2;
@@ -156,11 +153,10 @@ input:placeholder
    color: #1e90ff;
 }
 
-.palette
+#palette
 {
    align-items: center;
-   flex-direction: row;
-
+   flex-direction: column
 }
 
 .swatch
@@ -169,11 +165,13 @@ input:placeholder
    line-height: 2;
    font-size: 1rem;
    margin-inline: 0;
+   box-shadow: 0 2px 3px 0 #52240097;
 }
 
 
 #color-cards
 {
+   display: flex;
    flex-direction: column;
    margin-bottom: 50px;
 }
@@ -183,6 +181,7 @@ input:placeholder
    box-sizing: border-box;
    padding-inline: 8px;
    width: 100%;
+   box-shadow: 0 2px 3px 0 #52240097;
 }
 
 .color-card-prop[id$="prop1"]
@@ -241,12 +240,6 @@ footer a:active
    color: #ffa631;
 }
 
-#palette
-{
-   flex-direction: column;
-}
-
-
 @media all and (min-width: 768px)
 {
    header
@@ -275,6 +268,7 @@ footer a:active
 
    #color-cards
    {
+      flex-direction: row;
       column-gap: 10px;
    }
 

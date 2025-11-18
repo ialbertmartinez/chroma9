@@ -65,22 +65,22 @@ function isValid(val) {
 function getColor(condition) {
    switch (condition) {
       case "Snow":
-         return "#ffffff";
+         return "#57739aff";
       case "Clear":
-         return "#55c7f0";
+         return "#f8db65ff";
       case "Clouds":
-         return "#b1b5cc";
+         return "#75a1bcff";
       case "Rain":
-         return "#2B4D4D";
+         return "#2f7878ff";
       case "Thunderstorm":
-         return "#2a3454";
+         return "#070b66ff";
       case 'Mist':
       case 'Fog':
       case 'Haze':
       case 'Atmosphere':
-         return '#d2d7d3';
+         return '#8db194ff';
       default:
-         return '#b3c58a';
+         return '#85c13cff';
    }
 }
 

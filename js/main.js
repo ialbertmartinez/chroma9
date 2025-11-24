@@ -21,8 +21,8 @@ async function fetchData(e) {
    zipCodeEl.value = ""; // input reset
    modeSelectEl.selectedIndex = 0; // select reset
 
-
-   let url = `https://api.openweathermap.org/data/2.5/weather?zip=${uZip},us&units=${units}&appid=${apiKey}`; // build endpoint url for api call
+   let url = `https://api.openweathermap.org/data/2.5/weather?city=puertorico,co&units=${units}&appid=${apiKey}`;
+   // let url = `https://api.openweathermap.org/data/2.5/weather?zip=${uZip},us&units=${units}&appid=${apiKey}`; // build endpoint url for api call
    try {
       // OPENWEATHER API CALL
       let weatherResponse = await fetch(url);

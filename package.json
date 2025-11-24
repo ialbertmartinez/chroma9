@@ -4,7 +4,7 @@
   "source": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "parcel --open",
+    "start": "parcel serve ./index.html --public-url / --dist-dir dist",
     "build": "parcel build"
   },
   "keywords": [],

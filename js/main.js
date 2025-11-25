@@ -9,24 +9,23 @@ getColorsBtn.addEventListener("click", fetchData);
 async function fetchData(e) {
    const zipCodeEl = document.getElementById('zip');
 
-   const apiKey = WEATHER_API_KEY;
+   const apiKey = process.env.WEATHER_API_KEY;
    let units = 'imperial';
    let mode = modeSelectEl.value;
    let uZip = zipCodeEl.value.trim();
 
-   if (!isValid(uZip)) {
+   if ((!/^\d{5}$/.test(uZip)) || !uZip || uZip === undefined || uZip === "" || uZip === null) {
       displayMessage('Please enter a valid 5-digit zip code.', 'error');
    }
 
    zipCodeEl.value = ""; // input reset
    modeSelectEl.selectedIndex = 0; // select reset
 
-   let url = `https://api.openweathermap.org/data/2.5/weather?city=puertorico,co&units=${units}&appid=${apiKey}`;
-   // let url = `https://api.openweathermap.org/data/2.5/weather?zip=${uZip},us&units=${units}&appid=${apiKey}`; // build endpoint url for api call
+   let url = `https://api.openweathermap.org/data/2.5/weather?zip=${uZip},us&units=${units}&appid=${apiKey}`; // build endpoint url for api call
    try {
       // OPENWEATHER API CALL
       let weatherResponse = await fetch(url);
-      if (!weatherResponse.ok) { throw new Error(weatherResponse.status); }
+      if (!weatherResponse.ok) { throw new Error(`Error: ${weatherResponse.status}\nPlease enter a zip code and select a color mode`); }
       let weatherData = await weatherResponse.json();
 
       // console.log("weatherData: ", weatherData);
@@ -37,7 +36,7 @@ async function fetchData(e) {
 
       // CALL TO THE COLOR API
       let colorResponse = await fetch(colorUrl);
-      if (!colorResponse.ok) { throw new Error(colorResponse.status); }
+      if (!colorResponse.ok) { throw new Error(`Error: ${colorResponse.status}\nAn issue with fetching your color palette.`); }
       let colorData = await colorResponse.json();
       weatherData.mode = mode;
       // console.log("colorData: ", colorData);
@@ -50,16 +49,9 @@ async function fetchData(e) {
       displayPalette(colorData);
 
    } catch (error) {
-      console.error(`Error in fetching data: ${error}`);
+      console.error(`Error in fetching data:\t${error.message}`);
       displayMessage(error.message, "error");
    }
-}
-
-function isValid(val) {
-   if ((!/^\d{5}$/.test(val)) || !val || val === undefined || val === "" || val === null) {
-      return false;
-   }
-   return true;
 }
 
 function getColor(condition) {

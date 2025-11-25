@@ -4,7 +4,7 @@
   "source": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "parcel serve ./index.html --public-url / --dist-dir dist",
+    "start": "parcel --open",
     "build": "parcel build"
   },
   "keywords": [],
@@ -15,6 +15,6 @@
     "parcel": "^2.16.1"
   },
   "dependencies": {
-    "bootstrap": "^5.3.8"
+    "@popperjs/core": "^2.11.8"
   }
 }

@@ -197,6 +197,7 @@ input::placeholder
    min-width: 100%;
    padding-block: 15px;
    background-color: transparent;
+   border-color: rgba(0, 0, 0, .4);
 }
 
 #color-card-prop-list li h3

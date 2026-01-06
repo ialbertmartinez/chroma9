@@ -86,6 +86,12 @@ label
    font-style: normal;
 }
 
+input#zip:focus, input#mode:focus
+{
+   border: none;
+   box-shadow: none;
+   box-shadow: 0 0 3px 0 var(--bs-purple), 0 0 10px 0 var(--bs-purple);
+}
 label
 {
    margin-left: 12px;
@@ -162,7 +168,6 @@ input::placeholder
 
 .swatch
 {
-   display: none;
    box-sizing: border-box;
    line-height: 2;
    font-size: 1rem;
@@ -178,12 +183,14 @@ input::placeholder
    margin-bottom: 50px;
 }
 
-#color-cards > .color-card
+.color-card
 {
    box-sizing: border-box;
    padding-inline: 8px;
    width: 100%;
    box-shadow: 0 2px 3px 0 #52240097;
+   border-top: 2px solid;
+   border-color: #d2cec7;
 }
 
 #color-card-prop-list
@@ -197,7 +204,7 @@ input::placeholder
    min-width: 100%;
    padding-block: 15px;
    background-color: transparent;
-   border-color: rgba(0, 0, 0, .4);
+   border-color: rgba(0, 0, 0, .2);
 }
 
 #color-card-prop-list li h3
@@ -264,10 +271,12 @@ footer a:active
    .swatch
    {  font-family: "Barlow Condensed", sans-serif;
       color: #323232;
-      border-radius: 8px;
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
       font-size: 20px;
-      font-weight: 400;
+      font-weight: 800;
       letter-spacing: 0.2px;
+      text-align: center;
    }
 
    #color-cards

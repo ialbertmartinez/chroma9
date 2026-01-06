@@ -4,38 +4,51 @@ const getColorsBtn = document.getElementById('get-colors-btn');
 const infoDisplay = document.getElementById('info-display');
 const palette = document.getElementById('palette');
 
+
 getColorsBtn.addEventListener("click", fetchData);
 
 async function fetchData(e) {
    const zipCodeEl = document.getElementById('zip');
-
-   const apiKey = process.env.WEATHER_API_KEY;
-   let units = 'imperial';
+   let uZip = zipCodeEl.value.trim();  
    let mode = modeSelectEl.value;
-   let uZip = zipCodeEl.value.trim();
-
-   if ((!/^\d{5}$/.test(uZip)) || !uZip || uZip === undefined || uZip === "" || uZip === null) {
+   
+   if ((!/^\d{5}$/.test(uZip)) || !uZip || uZip === null) {
       displayMessage('Please enter a valid 5-digit zip code.', 'error');
+      return;
    }
 
-   zipCodeEl.value = ""; // input reset
-   modeSelectEl.selectedIndex = 0; // select reset
-
-   let url = `https://api.openweathermap.org/data/2.5/weather?zip=${uZip},us&units=${units}&appid=${apiKey}`; // build endpoint url for api call
+   let url = `https://api.zippopotam.us/us/${uZip}`; // build endpoint url
+   
    try {
+      // get lat/lon coordinates from zippopotam API
+      const geoResponse = await fetch(url);
+   if (!geoResponse.ok) { throw new Error(`Error: ${geoResponse.status}\nPlease enter a zip code and select a color mode`); }
+      const geoData = await geoResponse.json();
+
+      const lat = geoData.places[0].latitude;
+      const lon = geoData.places[0].longitude;
+      const city = geoData.places[0]['place name'];
+      console.log("geoData: ", geoData);
+
       // OPENWEATHER API CALL
+
+      url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=weather_code,temperature_2m&temperature_unit=fahrenheit`; 
       let weatherResponse = await fetch(url);
       if (!weatherResponse.ok) { throw new Error(`Error: ${weatherResponse.status}\nPlease enter a zip code and select a color mode`); }
       let weatherData = await weatherResponse.json();
 
-      // console.log("weatherData: ", weatherData);
-      let weatherCondition = weatherData.weather[0].main;
-      console.log(weatherData);
-      let swatch = getColor(weatherCondition).replace('#', '');
-      let colorUrl = `https://www.thecolorapi.com/scheme?hex=${swatch}&mode=${mode}&count=5`;
+      console.log("weatherData: ", weatherData);
+      console.log(`Current temp in ${city}: ${weatherData.current.temperature_2m}°F`);
+      let weatherCode = weatherData.current.weather_code;
+      let condition = getWeatherCondition(weatherCode);
+      console.log(weatherCode);
+      let swatch = getColor(condition).replace('#', '');
+      
+
+      url = `https://www.thecolorapi.com/scheme?hex=${swatch}&mode=${mode}&count=5`;
 
       // CALL TO THE COLOR API
-      let colorResponse = await fetch(colorUrl);
+      let colorResponse = await fetch(url);
       if (!colorResponse.ok) { throw new Error(`Error: ${colorResponse.status}\nAn issue with fetching your color palette.`); }
       let colorData = await colorResponse.json();
       weatherData.mode = mode;
@@ -45,115 +58,65 @@ async function fetchData(e) {
       // console.log('Final Color Palette:', colorData);
 
       // populate the DOM
-      displayWeather(weatherData);
+      displayMessage(`Showing ${weatherData.mode} palette for: ${condition} skies in ${city}`, "success");
       displayPalette(colorData);
+      
+      // reset input fields
+      zipCodeEl.value = ""; // input reset
+      modeSelectEl.selectedIndex = 0; // select reset
 
    } catch (error) {
       console.error(`Error in fetching data:\t${error.message}`);
-      displayMessage(error.message, "error");
+      displayMessage(`Error message: ${error.message}`);
    }
 }
 
-function getColor(condition) {
+function getWeatherCondition(weatherCode) {
+   let condition = '';
+   if(weatherCode > 90) { condition = 'Thunderstorm';}
+   else if(weatherCode > 70) { condition = 'Snow'; }
+   else if(weatherCode > 50) { condition = 'Rain'; }
+   else if(weatherCode > 40) { condition = 'Foggy';}
+   else if(weatherCode > 30) { condition = 'Overcast';}
+   else if(weatherCode > 20) { condition = 'Cloudy';}
+   else if(weatherCode >= 0) { condition = 'Clear';}
+
+   return condition;
+}
+
+ function getColor(condition) {  
    switch (condition) {
-      case "Snow":
-         return "#57739a";
-      case "Clear":
-         return "#f8db65";
-      case "Clouds":
-         return "#75a1bc";
-      case "Rain":
-         return "#2f7878";
-      case "Thunderstorm":
-         return "#070b66";
-      case 'Mist':
-      case 'Fog':
-      case 'Haze':
-      case 'Atmosphere':
-         return '#8db194';
-      default:
-         return '#85c13c';
-   }
-}
-
-
-function displayWeather(weatherData) {
-   let name = weatherData.name;
-   let description = weatherData.weather[0].description;
-
-   displayMessage(`Showing ${weatherData.mode} palette for: ${description} in ${name}`, "success");
-   // weatherDisplay.appendChild(imgEl);
+      case "Snow": return "#f3f8ff";
+      case "Clear": return "#f8db65";
+      case "Cloudy": return "#58707e";
+      case "Rain": return "#3dadad";
+      case "Thunderstorm": return "#070b66";
+      case 'Foggy':
+      case 'Overcast':
+      case 'Atmosphere' : return '#63df7c';
+      default: return '#85c13c';
+   };
 }
 
 function displayPalette(colorData) {
-   const colorCards = document.getElementById("color-cards");
-   colorCards.innerHTML = "";
-   console.log("colorData: ", colorData);
-   for (let i = 0; i < 5; i++) {
-      let swatchDiv = document.getElementById(`swatch${i}`);
-      swatchDiv.textContent = colorData.colors[i].hex.value;
-      swatchDiv.style.background = colorData.colors[i].hex.value;
-      swatchDiv.style.color = colorData.colors[i].contrast.value;
-      swatchDiv.style.display = "block";
-      let divEl = document.createElement("div"); // card el
-      let ulEl = document.createElement('ul'); // ul element
+   const palette = document.getElementById('palette');
+   palette.innerHTML = ""; // Clear previous results
 
-      let colorProp1 = document.createElement("li");
-      let colorProp2 = document.createElement("li");
-      let colorProp3 = document.createElement("li");
-      let colorProp4 = document.createElement("li");
-      let colorProp5 = document.createElement("li");
+   // Map through colors and create HTML string
+   const htmlContent = colorData.colors.map((color, i) => `
+      <div class="col-sm card mb-3 color-card" id="color${i}" style="border-top-color: ${color.hex.value}">
+         <div class="col-sm swatch py-2 mb-2" style="background: ${color.hex.value}; color: ${color.contrast.value}; display: block;">
+            ${color.name.value}
+         </div>
+         <ul class="list-group list-group-flush text-start" style="color: #323232;">
+            <li class="list-group-item color-card-prop"><p>${color.hex.value}</p></li>
+            <li class="list-group-item color-card-prop"><p>${color.rgb.value}</p></li>
+            <li class="list-group-item color-card-prop"><p>${color.cmyk.value}</p></li>
+         </ul>
+      </div>
+   `).join('');
 
-      // card
-      divEl.classList.add("col-sm", "card", "mb-3", "color-card");
-      divEl.id = `color${i}`;
-      divEl.style.background = colorData.colors[i].hex.value;
-      divEl.style.color = colorData.colors[i].contrast.value;
-
-      // list-group
-      ulEl.id = "color-card-prop-list";
-      ulEl.classList.add("list-group", "list-group-flush", "text-start");
-      ulEl.style.color = colorData.colors[i].contrast.value;
-
-      // card-list-group-items
-      // NAME
-      colorProp1.id = `color${i}-prop1`;
-      colorProp1.style.color = colorData.colors[i].contrast.value;
-      colorProp1.classList.add("list-group-item", "color-card-prop");
-      colorProp1.innerHTML = `<h3>${colorData.colors[i].name.value}</h3>`
-
-      // RGB
-      colorProp2.id = `color${i}-prop2`;
-      colorProp2.style.color = colorData.colors[i].contrast.value;
-      colorProp2.classList.add("list-group-item", "color-card-prop");
-      colorProp2.innerHTML = `<p>${colorData.colors[i].rgb.value}</p>`
-
-      // CMYK
-      colorProp3.id = `color${i}-prop3`;
-      colorProp3.style.color = colorData.colors[i].contrast.value;
-      colorProp3.classList.add("list-group-item", "color-card-prop");
-      colorProp3.innerHTML = `<p>${colorData.colors[i].cmyk.value}</p>`
-
-      // HEX
-      colorProp4.id = `color${i}-prop4`;
-      colorProp4.style.color = colorData.colors[i].contrast.value;
-      colorProp4.classList.add("list-group-item", "color-card-prop");
-      colorProp4.innerHTML = `<p><span class="color-card-prop-name">hex:</span> ${colorData.colors[i].hex.value}</p>`
-
-      // CONTRAST
-      colorProp5.id = `color${i}-prop5`;
-      colorProp5.style.color = colorData.colors[i].contrast.value;
-      colorProp5.classList.add("list-group-item", "color-card-prop");
-      colorProp5.innerHTML = `<p><span class="color-card-prop-name">contrast:</span> ${colorData.colors[i].contrast.value}</p>`
-
-      ulEl.appendChild(colorProp1);
-      ulEl.appendChild(colorProp2);
-      ulEl.appendChild(colorProp3);
-      ulEl.appendChild(colorProp4);
-      ulEl.appendChild(colorProp5); // append last color property too ul
-      divEl.appendChild(ulEl); // appen list to bs card  
-      colorCards.appendChild(divEl);// append partent to DOM
-   }
+   palette.innerHTML = htmlContent;
 }
 
 function displayMessage(message, type) {
